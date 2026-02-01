@@ -175,7 +175,7 @@ func main() {
 			fmt.Println("\nThank you for your cooperation. We will begin processing your details shortly.")
 		}
 
-		fmt.Println("\n✅ Registration complete! Welcome to GLOBAL '9' CORPORATION.")
+		fmt.Println("\n✅ Registration complete! Welcome abord.")
 		break
 	}
 }
