@@ -9,8 +9,8 @@ import (
 )
 
 func main() {
-	fmt.Println("WELCOME TO GLOBAL \"9\" CORPORATION.")
-	fmt.Println("[Motto: With GOD - Beyond Limits]")
+	fmt.Println("WELCOME.")
+	fmt.Println("ALL THINGS ARE POSSIBLE")
 	fmt.Println("\nPlease fill in the required information below so we can begin processing your details.\n")
 
 	reader := bufio.NewReader(os.Stdin)
