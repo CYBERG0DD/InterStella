@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global 9 | 2026 New Year Grant</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #0d0d0d;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid #d4af37;
+            box-shadow: 0 10px 50px rgba(212, 175, 55, 0.15);
+            text-align: center;
+        }
+
+        header h1 {
+            color: #d4af37;
+            margin: 0;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .promo {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px dashed #d4af37;
+            padding: 12px;
+            margin: 20px 0;
+            color: #d4af37;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            text-align: left;
+        }
+
+        /* RESTORED: Thick Yellow Labels */
+        label {
+            font-size: 0.85rem;
+            color: #d4af37;
+            /* Thick Gold/Yellow */
+            text-transform: uppercase;
+            font-weight: 900;
+            /* Extra Thick */
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            background: #252525;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #d4af37, #f4d03f);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: 900;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        #loader {
+            display: none;
+            margin: 20px auto;
+            border: 4px solid #333;
+            border-top: 4px solid #d4af37;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #prank-box {
+            display: none;
+            margin-top: 10px;
+            padding: 30px;
+            border-radius: 15px;
+            background: #000;
+            border: 2px solid #00ff88;
+        }
+
+        .joke-header {
+            color: #00ff88;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .personal-msg {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .friend-name {
+            color: #00ff88;
+            text-transform: capitalize;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header id="header-area">
+            <h1>Global Funds Commission</h1>
+            <div class="promo">✨ 2026 NEW YEAR GRANT: $100 ✨</div>
+        </header>
+
+        <div class="form-section" id="giveaway-form">
+            <div>
+                <label>Legal Account Name</label>
+                <input type="text" id="userName" placeholder="Full name on account">
+            </div>
+            <div>
+                <label>Receiving Bank</label>
+                <input type="text" id="bank" placeholder="e.g. Opay, Kuda, Zenith">
+            </div>
+            <div>
+                <label>Account Number</label>
+                <input type="text" id="acc" maxlength="10" placeholder="10-digit number">
+            </div>
+            <button onclick="startPrank()">Withdraw $100.00</button>
+        </div>
+
+        <div id="loader"></div>
+
+        <div id="prank-box">
+            <div class="joke-header">GOTCHA! 😂</div>
+            <div class="personal-msg">Happy New Year, <span id="displayName" class="friend-name"></span>!</div>
+            <p>RELAX no rush you've been successfully pranked 😁, There's no $100 here, but I hope this made you
+                smile. Let's make 2026 epic, love you! 🥂</p>
+            <button onclick="location.reload()"
+                style="background: #222; color: #00ff88; border: 1px solid #00ff88; font-size: 0.8rem;">TRY
+                AGAIN</button>
+        </div>
+    </div>
+
+    <script>
+        function startPrank() {
+            const name = document.getElementById('userName').value;
+            const accNum = document.getElementById('acc').value;
+
+            if (!name || accNum.length < 10) {
+                alert("Security Error: Please provide full details to verify your 2026 eligibility.");
+                return;
+            }
+
+            // Set the personalized name
+            document.getElementById('displayName').innerText = name;
+
+            // Transition
+            document.getElementById('giveaway-form').style.display = "none";
+            document.getElementById('header-area').style.display = "none";
+            document.getElementById('loader').style.display = "block";
+
+            setTimeout(() => {
+                document.getElementById('loader').style.display = "none";
+                document.getElementById('prank-box').style.display = "block";
+
+                // MEGA CENTER EXPLOSION
+                confetti({
+                    particleCount: 300,
+                    spread: 120,
+                    origin: { y: 0.6 },
+                    colors: ['#d4af37', '#00ff88', '#ffffff', '#ff0000']
+                });
+            }, 3000);
+        }
+    </script>
+
+</body>
+
+</html>

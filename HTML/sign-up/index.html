@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global 9 Corporation | Registration</title>
+    <style>
+        /* Keeping your original Professional & Clean Corporate Style */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #1a3a5f;
+            text-align: left;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #1a3a5f;
+            margin-bottom: 5px;
+        }
+
+        .motto {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a3a5f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #2a4a6f;
+        }
+
+        /* --- LOADING SPINNER STYLES --- */
+        #loading-overlay {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 0;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #1a3a5f;
+            border-radius: 50%;
+            animation: rotate 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* --- SUCCESS MESSAGE STYLES --- */
+        #success-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .well-done-box {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .check-mark {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div id="form-content">
+            <header>
+                <h1>GLOBAL "9" CORPORATION</h1>
+                <p class="motto">nothing impossible without God</p>
+                <p>Please fill in the required information below.</p>
+            </header>
+
+            <form id="regForm">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" id="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" id="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label>Username (minimum 5 characters)</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number (11 digits)</label>
+                    <input type="text" id="phone" maxlength="11" required>
+                </div>
+                <div class="form-group">
+                    <label>Birth Year (YYYY)</label>
+                    <input type="number" id="birthYear" placeholder="e.g. 1995" required>
+                </div>
+                <div class="form-group">
+                    <label>Profession</label>
+                    <select id="profession">
+                        <option value="cyber security specialist">Cyber Security Specialist</option>
+                        <option value="software engineer">Software Engineer</option>
+                        <option value="it technician">IT Technician</option>
+                    </select>
+                </div>
+
+                <button type="button" onclick="processRegistration()">Complete Registration</button>
+            </form>
+        </div>
+
+        <div id="loading-overlay">
+            <div class="spinner"></div>
+            <p style="color: #1a3a5f; font-weight: bold; letter-spacing: 1px;">VERIFYING CREDENTIALS...</p>
+        </div>
+
+        <div id="success-screen">
+            <div class="well-done-box">
+                <div class="check-mark">✔</div>
+                <h2 style="margin: 0;">WELL DONE!</h2>
+                <p id="final-msg" style="font-size: 1.1em; margin-top: 15px;"></p>
+                <button style="background-color: #155724; width: 150px; margin-top: 20px;"
+                    onclick="location.reload()">Return Home</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function processRegistration() {
+            // Get original logic variables
+            const user = document.getElementById('username').value;
+            const fName = document.getElementById('firstName').value;
+            const phone = document.getElementById('phone').value;
+            const year = parseInt(document.getElementById('birthYear').value);
+            const currentYear = 2026;
+            const age = currentYear - year;
+
+            // ORIGINAL VALIDATION LOGIC
+            if (user.length < 5) {
+                alert("Username must be at least 5 characters long.");
+                return;
+            }
+
+            if (phone.length !== 11 || isNaN(phone)) {
+                alert("Phone number must be exactly 11 digits.");
+                return;
+            }
+
+            if (age < 18 || age > 45) {
+                alert(`Age is ${age}. You do not meet the 18–45 requirement.`);
+                return;
+            }
+
+            // TRANSITION LOGIC
+            // 1. Hide the original form
+            document.getElementById('form-content').style.display = "none";
+
+            // 2. Show the rotating loader
+            document.getElementById('loading-overlay').style.display = "flex";
+
+            // 3. Delay for 2 seconds (the "Loading" feel)
+            setTimeout(() => {
+                // 4. Hide loader, show success message
+                document.getElementById('loading-overlay').style.display = "none";
+                document.getElementById('success-screen').style.display = "flex";
+
+                document.getElementById('final-msg').innerHTML =
+                    "Congratulations <strong>" + fName + "</strong> for signing up.<br>Welcome to the Global 9 network.";
+            }, 2000);
+        }
+    </script>
+
+</body>
+
+</html>

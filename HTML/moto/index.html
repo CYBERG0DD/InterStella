@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFINITE TECH | Elite Auto Group</title>
+    <style>
+        /* Modernized CSS with a High-Tech Glow */
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #050505;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            background: linear-gradient(180deg, #000 0%, #111 100%);
+            padding: 40px 20px;
+            border-bottom: 3px solid #00ff88;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #00ff88;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        main {
+            padding: 20px 10%;
+        }
+
+        section {
+            background-color: #111;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+        }
+
+        /* Dealership Inventory Grid */
+        .showroom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .car-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .car-card:hover {
+            border-color: #00ff88;
+            transform: translateY(-5px);
+        }
+
+        .price {
+            color: #00ff88;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: block;
+            margin: 10px 0;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .buy-btn {
+            background-color: #00ff88;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .sell-btn {
+            background-color: transparent;
+            color: #00ff88;
+            border: 2px solid #00ff88;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .sell-btn:hover {
+            background: #00ff88;
+            color: #000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #000;
+        }
+
+        th,
+        td {
+            border: 1px solid #444;
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #00ff88;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>MEL | ELITE AUTO GROUP</h1>
+        <p><em>Buy. Sell. Trade. Performance Analytics.</em></p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Available Inventory (Buy)</h2>
+            <div class="showroom-grid">
+                <div class="car-card">
+                    <h3>Porsche 911 GT3 RS</h3>
+                    <span class="price">$235,800</span>
+                    <p>Engine: 4.0L Flat-6</p>
+                    <button class="buy-btn" onclick="alert('Order request sent to our servers ')">BUY</button>
+                </div>
+                <div class="car-card">
+                    <h3>Lamborghini Revuelto</h3>
+                    <span class="price">$700,000</span>
+                    <p>Engine: V12 Hybrid</p>
+                    <button class="buy-btn" onclick="alert('Financing approval pending...')">BUY</button>
+                </div>
+                <div class="car-card">
+                    <h3>Tesla Model S Plaid</h3>
+                    <span class="price">$189,990</span>
+                    <p>Engine: Tri-Motor Electric</p>
+                    <button class="buy-btn" onclick="alert('Unit assigned to your wallet.')">BUY</button>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Sell Your Vehicle (Instant Valuation)</h2>
+            <p>Ready to upgrade? Get a CYB3R-verified quote for your current fleet.</p>
+            <form
+                onsubmit="event.preventDefault(); alert('Analyzing market data for your ' + document.getElementById('carName').value + '...')">
+                <div class="form-group">
+                    <label>Vehicle Year, Make, & Model</label>
+                    <input type="text" id="carName" placeholder="e.g. 2022 BMW M4 Competition" required>
+                </div>
+                <div class="form-group">
+                    <label>Current Mileage</label>
+                    <input type="number" placeholder="e.g. 15000" required>
+                </div>
+                <div class="form-group">
+                    <label>Condition</label>
+                    <select>
+                        <option>Pristine / Collector Grade</option>
+                        <option>Excellent</option>
+                        <option>Good</option>
+                        <option>Track Used</option>
+                    </select>
+                </div>
+                <button type="submit" class="sell-btn">GET CASH OFFER</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Performance Metrics</h2>
+            <h4>High Performance luxary cars only the rich can afford</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>0-60 MPH</th>
+                        <th>Top Speed</th>
+                        <th>Braking (70-0)</th>
+                        <th>price ($$$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ferrari SF90 XX</td>
+                        <td>2.3s</td>
+                        <td>209 MPH</td>
+                        <td>120 ft</td>
+                        <td>$2,500,000</td>
+                    </tr>
+                    <tr>
+                        <td>Jesko Absolut</td>
+                        <td>2.5s</td>
+                        <td>330 MPH</td>
+                        <td>95 ft</td>
+                        <td>$5,000,000</td>
+                    </tr>
+                    <tr>
+                        <td>Bugatti Chiron</td>
+                        <td>2.4s</td>
+                        <td>304.8 MPH</td>
+                        <td>98 ft</td>
+                        <td>$5,000,000</td>
+                    </tr>
+                    <tr>
+                        <td>Lamborghini veneno (limited edition)</td>
+                        <td>2.5s</td>
+                        <td>221 MPH</td>
+                        <td>95 ft</td>
+                        <td>$18,000,000</td>
+                    </tr>
+                    <tr>
+                        <td>mclaren </td>
+                        <td>2.4s</td>
+                        <td>304.8 MPH</td>
+                        <td>98 ft</td>
+                        <td>$5,000,000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+
+</html>
