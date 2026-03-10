@@ -4,221 +4,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global 9 | 2026 New Year Grant</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #0d0d0d;
-            color: #e0e0e0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 450px;
-            background: #1a1a1a;
-            padding: 40px;
-            border-radius: 15px;
-            border: 1px solid #d4af37;
-            box-shadow: 0 10px 50px rgba(212, 175, 55, 0.15);
-            text-align: center;
-        }
-
-        header h1 {
-            color: #d4af37;
-            margin: 0;
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .promo {
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px dashed #d4af37;
-            padding: 12px;
-            margin: 20px 0;
-            color: #d4af37;
-            font-weight: bold;
-            border-radius: 8px;
-        }
-
-        .form-section {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            text-align: left;
-        }
-
-        /* RESTORED: Thick Yellow Labels */
-        label {
-            font-size: 0.85rem;
-            color: #d4af37;
-            /* Thick Gold/Yellow */
-            text-transform: uppercase;
-            font-weight: 900;
-            /* Extra Thick */
-            letter-spacing: 0.5px;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input {
-            width: 100%;
-            padding: 14px;
-            background: #252525;
-            border: 1px solid #444;
-            border-radius: 8px;
-            color: #fff;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #d4af37;
-        }
-
-        button {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(45deg, #d4af37, #f4d03f);
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            font-weight: 900;
-            cursor: pointer;
-            font-size: 1.1rem;
-            margin-top: 10px;
-            text-transform: uppercase;
-        }
-
-        #loader {
-            display: none;
-            margin: 20px auto;
-            border: 4px solid #333;
-            border-top: 4px solid #d4af37;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        #prank-box {
-            display: none;
-            margin-top: 10px;
-            padding: 30px;
-            border-radius: 15px;
-            background: #000;
-            border: 2px solid #00ff88;
-        }
-
-        .joke-header {
-            color: #00ff88;
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-        }
-
-        .personal-msg {
-            font-size: 1.3rem;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-
-        .friend-name {
-            color: #00ff88;
-            text-transform: capitalize;
-            font-weight: bold;
-        }
-    </style>
+    <title>Global Funds Commission | 2026 Grant Portal</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-
-    <div class="container">
-        <header id="header-area">
-            <h1>Global Funds Commission</h1>
-            <div class="promo">✨ 2026 NEW YEAR GRANT: $100 ✨</div>
-        </header>
-
-        <div class="form-section" id="giveaway-form">
-            <div>
-                <label>Legal Account Name</label>
-                <input type="text" id="userName" placeholder="Full name on account">
+    <div class="card">
+        <div class="card-stripe"></div>
+        <div class="card-body">
+            <!-- HEADER -->
+            <div class="portal-header">
+                <div class="portal-logo">🏛</div>
+                <div class="portal-name">Global Funds Commission</div>
+                <div class="portal-sub">Certified International Grant Portal</div>
             </div>
-            <div>
-                <label>Receiving Bank</label>
-                <input type="text" id="bank" placeholder="e.g. Opay, Kuda, Zenith">
+            <!-- GRANT FORM -->
+            <div class="form-step active" id="form-screen">
+                <div class="grant-banner">
+                    <div class="grant-icon">💰</div>
+                    <div class="grant-text">
+                        <div class="grant-title">2026 Grant</div>
+                        <div class="grant-amount">$100.00 USD</div>
+                        <div class="grant-desc">Limited slots · Verified recipients only · Expires midnight</div>
+                    </div>
+                </div>
+                <div class="trust-row">
+                    <div class="trust-badge">
+                        <div class="dot"></div>256-bit SSL
+                    </div>
+                    <div class="trust-badge">
+                        <div class="dot"></div>Verified Portal
+                    </div>
+                    <div class="trust-badge">
+                        <div class="dot"></div>Instant Transfer
+                    </div>
+                </div>
+                <div class="fg">
+                    <label>Legal Account Name</label>
+                    <input type="text" id="userName" placeholder="Full name on account" oninput="checkName(this)">
+                    <div class="field-hint" id="h-name"></div>
+                </div>
+                <div class="fg">
+                    <label>Select Your Bank</label>
+                    <div class="bank-types" id="bank-types">
+                        <div class="bt sel" id="bt-opay" onclick="selBank('OPay','bt-opay')">
+                            <div class="bt-icon">🟢</div>
+                            <div class="bt-name">OPay</div>
+                        </div>
+                        <div class="bt" id="bt-kuda" onclick="selBank('Kuda','bt-kuda')">
+                            <div class="bt-icon">🟣</div>
+                            <div class="bt-name">Kuda</div>
+                        </div>
+                        <div class="bt" id="bt-zenith" onclick="selBank('Zenith','bt-zenith')">
+                            <div class="bt-icon">🔴</div>
+                            <div class="bt-name">Zenith</div>
+                        </div>
+                        <div class="bt" id="bt-gtb" onclick="selBank('GTBank','bt-gtb')">
+                            <div class="bt-icon">🟠</div>
+                            <div class="bt-name">GTBank</div>
+                        </div>
+                        <div class="bt" id="bt-uba" onclick="selBank('UBA','bt-uba')">
+                            <div class="bt-icon">🔵</div>
+                            <div class="bt-name">UBA</div>
+                        </div>
+                        <div class="bt" id="bt-other" onclick="selBank('Other','bt-other')">
+                            <div class="bt-icon">🏦</div>
+                            <div class="bt-name">Other</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fg">
+                    <label>Account Number</label>
+                    <input type="text" id="accNum" maxlength="10" placeholder="10-digit account number"
+                        oninput="checkAcc(this)">
+                    <div class="field-hint" id="h-acc"></div>
+                </div>
+                <button class="btn-submit" onclick="startVerify()">
+                    🔐 Claim My $100 Grant
+                </button>
+                <div class="secure-footer">
+                    🔒 Secured · GFC Portal v4.2 · All transactions encrypted
+                </div>
             </div>
-            <div>
-                <label>Account Number</label>
-                <input type="text" id="acc" maxlength="10" placeholder="10-digit number">
+            <!-- VERIFICATION SCREEN -->
+            <div id="verify-screen">
+                <div class="verify-title">Verifying Eligibility...</div>
+                <div class="verify-sub">Please wait while we process your request</div>
+                <div class="vcheck" id="vc1">
+                    <div class="vcheck-icon" id="vci1">⏳</div>
+                    <div class="vcheck-text">
+                        <div class="vcheck-label">Identity Verification</div>
+                        <div class="vcheck-detail" id="vcd1">Checking KYC database...</div>
+                    </div>
+                </div>
+                <div class="vcheck" id="vc2">
+                    <div class="vcheck-icon" id="vci2">⏳</div>
+                    <div class="vcheck-text">
+                        <div class="vcheck-label">Account Validation</div>
+                        <div class="vcheck-detail" id="vcd2">Waiting...</div>
+                    </div>
+                </div>
+                <div class="vcheck" id="vc3">
+                    <div class="vcheck-icon" id="vci3">⏳</div>
+                    <div class="vcheck-text">
+                        <div class="vcheck-label">Grant Eligibility Check</div>
+                        <div class="vcheck-detail" id="vcd3">Waiting...</div>
+                    </div>
+                </div>
+                <div class="vcheck" id="vc4">
+                    <div class="vcheck-icon" id="vci4">⏳</div>
+                    <div class="vcheck-text">
+                        <div class="vcheck-label">Initiating Transfer</div>
+                        <div class="vcheck-detail" id="vcd4">Waiting...</div>
+                    </div>
+                </div>
+                <div class="progress-bar-wrap">
+                    <div class="progress-label">Processing <span id="pct">0%</span></div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="prog-fill"></div>
+                    </div>
+                </div>
+                <div class="fake-preview" id="fake-preview">
+                    <div class="fp-row"><span class="fp-key">Recipient</span><span class="fp-val" id="fp-name">—</span>
+                    </div>
+                    <div class="fp-row"><span class="fp-key">Bank</span><span class="fp-val" id="fp-bank">—</span></div>
+                    <div class="fp-row"><span class="fp-key">Account</span><span class="fp-val" id="fp-acc">—</span>
+                    </div>
+                    <div class="fp-row"><span class="fp-key">Amount</span><span class="fp-val green">$100.00 USD</span>
+                    </div>
+                    <div class="fp-row"><span class="fp-key">Status</span><span class="fp-val green"
+                            id="fp-status">Processing...</span></div>
+                </div>
             </div>
-            <button onclick="startPrank()">Withdraw $100.00</button>
-        </div>
-
-        <div id="loader"></div>
-
-        <div id="prank-box">
-            <div class="joke-header">GOTCHA! 😂</div>
-            <div class="personal-msg">Happy New Year, <span id="displayName" class="friend-name"></span>!</div>
-            <p>RELAX no rush you've been successfully pranked 😁, There's no $100 here, but I hope this made you
-                smile. Let's make 2026 epic, love you! 🥂</p>
-            <button onclick="location.reload()"
-                style="background: #222; color: #00ff88; border: 1px solid #00ff88; font-size: 0.8rem;">TRY
-                AGAIN</button>
+            <!-- GOTCHA SCREEN -->
+            <div id="gotcha-screen">
+                <span class="gotcha-emoji">😂</span>
+                <div class="gotcha-title">GOTCHA!!</div>
+                <div class="gotcha-sub">April Fools · You've been pranked</div>
+                <div class="friend-card">
+                    <div class="friend-greeting">Happy April Fools,</div>
+                    <span class="friend-name" id="friend-name-display">Friend!</span>
+                </div>
+                <div class="roast-text" id="roast-msg">
+                    You actually typed in your <strong>real account number</strong> 😭<br>
+                    The way your eyes lit up at <strong>"$100"</strong> — priceless! 😂<br>
+                    No money is coming bro, but love you loads! 🥂
+                </div>
+                <div class="gotcha-stats">
+                    <div class="gstat">
+                        <div class="gstat-val">$0</div>
+                        <div class="gstat-label">Received</div>
+                    </div>
+                    <div class="gstat">
+                        <div class="gstat-val">100%</div>
+                        <div class="gstat-label">Pranked</div>
+                    </div>
+                    <div class="gstat">
+                        <div class="gstat-val">😂</div>
+                        <div class="gstat-label">Reaction</div>
+                    </div>
+                </div>
+                <div class="share-row">
+                    <button class="btn-share btn-whatsapp" onclick="shareWhatsapp()">📤 Share Prank</button>
+                    <button class="btn-share btn-copy" onclick="copyLink()">🔗 Copy Link</button>
+                </div>
+                <button class="btn-again" onclick="location.reload()">↩ Prank Another Friend</button>
+            </div>
         </div>
     </div>
-
     <script>
-        function startPrank() {
-            const name = document.getElementById('userName').value;
-            const accNum = document.getElementById('acc').value;
-
-            if (!name || accNum.length < 10) {
-                alert("Security Error: Please provide full details to verify your 2026 eligibility.");
-                return;
+        let selectedBank = 'OPay';
+        /* ── BANK SELECT ── */
+        function selBank(name, id) {
+            selectedBank = name;
+            document.querySelectorAll('.bt').forEach(b => b.classList.remove('sel'));
+            document.getElementById(id).classList.add('sel');
+        }
+        /* ── LIVE VALIDATION ── */
+        function checkName(inp) {
+            const v = inp.value.trim();
+            const h = document.getElementById('h-name');
+            if (v.length >= 3) {
+                inp.classList.add('valid');
+                h.textContent = '✓ Name verified'; h.className = 'field-hint ok';
+            } else {
+                inp.classList.remove('valid');
+                h.textContent = v.length ? 'Enter your full name' : ''; h.className = 'field-hint';
             }
-
-            // Set the personalized name
-            document.getElementById('displayName').innerText = name;
-
-            // Transition
-            document.getElementById('giveaway-form').style.display = "none";
-            document.getElementById('header-area').style.display = "none";
-            document.getElementById('loader').style.display = "block";
-
+        }
+        function checkAcc(inp) {
+            const v = inp.value.replace(/\D/g, ''); inp.value = v;
+            const h = document.getElementById('h-acc');
+            if (v.length === 10) {
+                inp.classList.add('valid');
+                h.textContent = '✓ Account format valid'; h.className = 'field-hint ok';
+            } else {
+                inp.classList.remove('valid');
+                h.textContent = v.length ? `${v.length}/10 digits` : ''; h.className = 'field-hint';
+            }
+        }
+        /* ── START PRANK ── */
+        function startVerify() {
+            const name = document.getElementById('userName').value.trim();
+            const acc = document.getElementById('accNum').value.trim();
+            if (name.length < 2) {
+                document.getElementById('h-name').textContent = '⚠ Please enter your full name';
+                document.getElementById('h-name').className = 'field-hint err';
+                document.getElementById('userName').focus(); return;
+            }
+            if (acc.length !== 10) {
+                document.getElementById('h-acc').textContent = '⚠ Must be exactly 10 digits';
+                document.getElementById('h-acc').className = 'field-hint err';
+                document.getElementById('accNum').focus(); return;
+            }
+            // populate preview
+            document.getElementById('fp-name').textContent = name;
+            document.getElementById('fp-bank').textContent = selectedBank;
+            document.getElementById('fp-acc').textContent = acc.slice(0, 3) + '****' + acc.slice(-3);
+            document.getElementById('friend-name-display').textContent = name.split(' ')[0] + '!';
+            // switch screens
+            document.getElementById('form-screen').style.display = 'none';
+            const vs = document.getElementById('verify-screen');
+            vs.style.display = 'block';
+            runVerification(name);
+        }
+        function runVerification(name) {
+            const steps = [
+                {
+                    id: 1, delay: 600, spinMs: 1200,
+                    detail: 'Cross-referencing NIN database...',
+                    okDetail: `Identity confirmed: ${name}`
+                },
+                {
+                    id: 2, delay: 500, spinMs: 1000,
+                    detail: `Querying ${selectedBank} API...`,
+                    okDetail: 'Account number valid ✓'
+                },
+                {
+                    id: 3, delay: 400, spinMs: 1400,
+                    detail: 'Checking 2026 grant eligibility...',
+                    okDetail: 'ELIGIBLE — Grant slot reserved!'
+                },
+                {
+                    id: 4, delay: 300, spinMs: 1100,
+                    detail: 'Connecting to transfer gateway...',
+                    okDetail: 'Transfer initialized!'
+                },
+            ];
+            let cumDelay = 0;
+            let pct = 0;
+            steps.forEach((s, i) => {
+                // start spinning
+                setTimeout(() => {
+                    const icon = document.getElementById('vci' + s.id);
+                    icon.className = 'vcheck-icon spin';
+                    icon.textContent = '';
+                    document.getElementById('vcd' + s.id).textContent = s.detail;
+                    // animate progress
+                    animatePct(pct, pct + 22, 800);
+                }, cumDelay + s.delay);
+                // mark ok
+                setTimeout(() => {
+                    const icon = document.getElementById('vci' + s.id);
+                    icon.className = 'vcheck-icon ok';
+                    icon.textContent = '';
+                    document.getElementById('vcd' + s.id).textContent = s.okDetail;
+                    pct += 22;
+                    // show fake preview after step 2
+                    if (i === 1) {
+                        document.getElementById('fake-preview').style.display = 'block';
+                    }
+                }, cumDelay + s.delay + s.spinMs);
+                cumDelay += s.delay + s.spinMs + 200;
+            });
+            // final: 100% then gotcha
+            const totalDelay = cumDelay + 500;
             setTimeout(() => {
-                document.getElementById('loader').style.display = "none";
-                document.getElementById('prank-box').style.display = "block";
-
-                // MEGA CENTER EXPLOSION
-                confetti({
-                    particleCount: 300,
-                    spread: 120,
-                    origin: { y: 0.6 },
-                    colors: ['#d4af37', '#00ff88', '#ffffff', '#ff0000']
-                });
-            }, 3000);
+                animatePct(88, 100, 600);
+                document.getElementById('fp-status').textContent = '✅ Transfer Complete!';
+                document.getElementById('fp-status').style.color = 'var(--green)';
+            }, totalDelay);
+            setTimeout(() => showGotcha(name), totalDelay + 900);
+        }
+        function animatePct(from, to, duration) {
+            const start = performance.now();
+            function tick(now) {
+                const t = Math.min((now - start) / duration, 1);
+                const cur = Math.round(from + (to - from) * t);
+                document.getElementById('pct').textContent = cur + '%';
+                document.getElementById('prog-fill').style.width = cur + '%';
+                if (t < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }
+        /* ── GOTCHA ── */
+        function showGotcha(name) {
+            document.getElementById('verify-screen').style.display = 'none';
+            const gs = document.getElementById('gotcha-screen');
+            gs.style.display = 'block';
+            // personalize roast
+            const firstName = name.split(' ')[0];
+            document.getElementById('roast-msg').innerHTML =
+                `You actually typed in your <strong>real account number</strong> 😭💀<br>
+     The way you rushed to enter your details for <strong>"$100"</strong> — iconic! 😂<br>
+     No money today <strong>${firstName}</strong>, but you just made my day! Love you 🥂`;
+            // confetti burst
+            setTimeout(() => {
+                confetti({ particleCount: 120, spread: 100, origin: { y: .6 }, colors: ['#2d8bff', '#60aaff', '#ffffff', '#00e676'] });
+                setTimeout(() => {
+                    confetti({ particleCount: 80, angle: 60, spread: 70, origin: { x: 0, y: .6 }, colors: ['#0044cc', '#2d8bff', '#aad4ff'] });
+                    confetti({ particleCount: 80, angle: 120, spread: 70, origin: { x: 1, y: .6 }, colors: ['#00e676', '#60aaff', '#ffffff'] });
+                }, 300);
+            }, 200);
+        }
+        /* ── SHARE ── */
+        function shareWhatsapp() {
+            const url = encodeURIComponent(location.href);
+            const msg = encodeURIComponent("😂 I just got pranked by this 'Free $100 Grant' page LMAOO — try it on your friends! 👇");
+            window.open(`https://wa.me/?text=${msg}%20${url}`, '_blank');
+        }
+        function copyLink() {
+            navigator.clipboard.writeText(location.href).then(() => {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => btn.textContent = '🔗 Copy Link', 2000);
+            });
         }
     </script>
-
+    <script src="js/script.js"></script>
 </body>
 
 </html>
