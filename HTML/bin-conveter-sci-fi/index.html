@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>base-x | Universal Base Translator</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- Custom cursor -->
+  <div id="cursor"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+  <!-- Overlays -->
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+  <!-- Animated canvas bg -->
+  <canvas id="bg-canvas"></canvas>
+  <!-- Binary rain -->
+  <div id="binary-rain"></div>
+  <!-- HUD corner tags -->
+  <div class="hud-tag hud-tag-tl">BASEX//SYS<br>NODE-ACTIVE</div>
+  <div class="hud-tag hud-tag-tr">ENC-READY<br>UPLINK-OK</div>
+  <div class="hud-tag hud-tag-bl">BASE-2 // BASE-16<br>UTF-8 COMPAT</div>
+  <div class="hud-tag hud-tag-br">v3.0 // STABLE<br>ALL SYSTEMS GO</div>
+  <div class="wrap">
+    <!-- HEADER -->
+    <header>
+      <div class="hud-top">
+        <div class="hud-top-item">
+          <div class="hud-dot"></div>SYSTEMS ONLINE
+        </div>
+        <div class="hud-top-item">BASE-X // UNIVERSAL BASE TRANSLATOR</div>
+        <div class="hud-top-item">
+          <div class="hud-dot" style="background:var(--violet);box-shadow:0 0 6px var(--violet)"></div>HEX READY
+        </div>
+      </div>
+      <div class="logo-wrap">
+        <div class="logo-ring"></div>
+        <h1>BASE-X</h1>
+      </div>
+      <div class="header-sub">Universal Base Translator <span>// v3.0</span></div>
+    </header>
+    <!-- MODE TABS -->
+    <div class="mode-tabs">
+      <button class="mode-tab active" id="btn-encode" onclick="setMode('encode')">
+        TEXT→BIN
+      </button>
+      <button class="mode-tab" id="btn-decode" onclick="setMode('decode')">
+        BIN→TEXT
+      </button>
+      <button class="mode-tab" id="btn-hexencode" onclick="setMode('hexencode')">
+        TEXT→HEX
+      </button>
+      <button class="mode-tab" id="btn-hexdecode" onclick="setMode('hexdecode')">
+        HEX→TEXT
+      </button>
+    </div>
+    <!-- PANEL -->
+    <div class="panel" id="main-panel">
+      <div class="panel-corner-tl"></div>
+      <div class="panel-corner-br"></div>
+      <div class="panel-header">
+        <div class="ph-left">
+          <div class="ph-dot"></div>
+          <div class="ph-title" id="panel-title">ENCODE // TEXT TO BINARY</div>
+        </div>
+        <div class="ph-right" id="ph-right">BASE-2</div>
+      </div>
+      <div class="panel-body">
+        <div class="input-label">
+          <span class="input-label-text" id="input-label-text">INPUT TEXT</span>
+          <span class="char-count" id="char-count">0 CHARS</span>
+        </div>
+        <div class="input-shell">
+          <div class="input-corner ic-tl"></div>
+          <div class="input-corner ic-tr"></div>
+          <div class="input-corner ic-bl"></div>
+          <div class="input-corner ic-br"></div>
+          <textarea id="input-area" rows="4" placeholder="Type something to encode..." oninput="handleInput()"
+            onkeydown="handleKeydown(event)" spellcheck="false"></textarea>
+        </div>
+        <div class="error-msg" id="error-msg"></div>
+        <button class="translate-btn" id="translate-btn" onclick="runTranslate()">
+          <div class="btn-fill"></div>
+          <span>⬡ TRANSLATE</span>
+        </button>
+        <div class="divider">OUTPUT</div>
+        <div class="output-wrapper">
+          <div class="output-box empty" id="output-box">Awaiting input...</div>
+          <button class="copy-btn" id="copy-btn" onclick="copyOutput()">COPY</button>
+        </div>
+        <div class="stats-bar" id="stats-bar">
+          <div class="stat">
+            <div class="stat-label">CHARS</div>
+            <div class="stat-val" id="stat-chars">—</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">BITS</div>
+            <div class="stat-val" id="stat-bits">—</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">BYTES</div>
+            <div class="stat-val" id="stat-bytes">—</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">MODE</div>
+            <div class="stat-val" id="stat-mode">—</div>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <button class="clear-btn" onclick="clearAll()">[ CLEAR ]</button>
+        </div>
+      </div>
+    </div>
+    <div class="hud-bottom">
+      <span>BASEX</span> &nbsp;//&nbsp; BINARY &nbsp;·&nbsp; HEXADECIMAL &nbsp;·&nbsp; BASE ENCODING
+      <span>v3.0</span>
+    </div>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+
+</html>
