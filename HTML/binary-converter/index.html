@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BINTRANS // Binary Code Translator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="binary-rain"></div>
+    <div class="container">
+        <header>
+            <div class="header-eyebrow">// systems online</div>
+            <h1>BASE-X</h1>
+            <div class="header-sub">
+                <h3>Binary & Hexadecimal Code Translator</h3> <span>v3.0</span>
+            </div>
+        </header>
+        <div class="mode-toggle">
+            <button class="mode-btn active" id="btn-encode" onclick="setMode('encode')">
+                TEXT → BINARY
+            </button>
+            <button class="mode-btn" id="btn-decode" onclick="setMode('decode')">
+                BINARY → TEXT
+            </button>
+            <button class="mode-btn" id="btn-hexencode" onclick="setMode('hexencode')">
+                TEXT → HEX
+            </button>
+            <button class="mode-btn" id="btn-hexdecode" onclick="setMode('hexdecode')">
+                HEX → TEXT
+            </button>
+        </div>
+        <div class="panel">
+            <div class="panel-header">
+                <div class="dot"></div>
+                <span id="panel-title">ENCODE // TEXT TO BINARY</span>
+            </div>
+            <div class="panel-body">
+                <div class="input-label">
+                    <span id="input-label-text">INPUT TEXT</span>
+                    <span class="char-count" id="char-count">0 chars</span>
+                </div>
+                <textarea id="input-area" rows="4" placeholder="Type something to encode..." oninput="handleInput()"
+                    onkeydown="handleKeydown(event)" spellcheck="false"></textarea>
+                <div class="error-msg" id="error-msg"></div>
+                <button class="translate-btn" id="translate-btn" onclick="runTranslate()">
+                    TRANSLATE
+                </button>
+                <div class="divider">OUTPUT</div>
+                <div class="output-wrapper">
+                    <div class="output-box empty" id="output-box">
+                        Awaiting input...
+                    </div>
+                    <button class="copy-btn" id="copy-btn" onclick="copyOutput()">COPY</button>
+                </div>
+                <div class="stats-bar" id="stats-bar">
+                    <div class="stat">
+                        <span>CHARS</span>
+                        <span class="stat-val" id="stat-chars">—</span>
+                    </div>
+                    <div class="stat">
+                        <span>BITS</span>
+                        <span class="stat-val" id="stat-bits">—</span>
+                    </div>
+                    <div class="stat">
+                        <span>BYTES</span>
+                        <span class="stat-val" id="stat-bytes">—</span>
+                    </div>
+                    <div class="stat">
+                        <span>MODE</span>
+                        <span class="stat-val" id="stat-mode">—</span>
+                    </div>
+                </div>
+                <div style="text-align:right">
+                    <button class="clear-btn" onclick="clearAll()">[ clear ]</button>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <span>//</span> ASCII ENCODING &nbsp;·&nbsp; UTF-8 COMPATIBLE &nbsp;·&nbsp; <span>8-BIT</span> GROUPING
+        </footer>
+    </div>
+    <div class="tooltip" id="tooltip"></div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
