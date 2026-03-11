@@ -4,8 +4,8 @@ const ASSETS = [
   './css/style.css',
   './js/script.js',
   './manifest.json',
-  './icon-192.png',
-  './icon-512.png',
+  './bitforge-icon-192.png',
+  './bitforge-icon-512.png',
   'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap'
 ];
 
