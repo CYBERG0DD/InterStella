@@ -39,54 +39,6 @@ body {
   color: var(--text);
   font-family: 'Share Tech Mono', monospace;
   min-height: 100vh;
-  cursor: none;
-}
-
-/* ── CUSTOM CURSOR ── */
-#cursor {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform .1s;
-}
-
-#cursor::before,
-#cursor::after {
-  content: '';
-  position: absolute;
-  background: var(--active-color)
-}
-
-#cursor::before {
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  transform: translateY(-50%)
-}
-
-#cursor::after {
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  transform: translateX(-50%)
-}
-
-.cursor-ring {
-  position: fixed;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--active-color);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: left .08s, top .08s, border-color .3s;
-  opacity: .5;
 }
 
 /* ── CANVAS BG ── */
@@ -206,43 +158,21 @@ header {
 
 .logo-wrap {
   position: relative;
-  display: inline-block;
-  margin-bottom: 16px
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
-.logo-ring {
-  position: absolute;
-  inset: -16px;
-  border-radius: 50%;
-  border: 1px solid var(--active-color);
-  opacity: .2;
-  animation: spinRing 12s linear infinite;
-  transition: border-color .5s;
-}
-
-.logo-ring::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--active-color);
-  box-shadow: 0 0 10px var(--active-color);
-  transform: translateX(-50%);
-  transition: background .5s, box-shadow .5s;
-}
-
-@keyframes spinRing {
-  to {
-    transform: rotate(360deg)
-  }
+#atom-canvas {
+  display: block;
+  filter: drop-shadow(0 0 18px var(--active-color));
+  transition: filter .5s;
 }
 
 h1 {
   font-family: 'Orbitron', monospace;
-  font-size: clamp(2.2rem, 8vw, 4.5rem);
+  font-size: clamp(1.8rem, 6vw, 3.2rem);
   font-weight: 900;
   letter-spacing: .15em;
   color: var(--active-color);
@@ -250,6 +180,21 @@ h1 {
   position: relative;
   display: inline-block;
   transition: color .5s, text-shadow .5s;
+  z-index: 3;
+  margin-top: -20px;
+}
+
+h1 {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.6rem, 6vw, 3rem);
+  font-weight: 900;
+  letter-spacing: .15em;
+  color: var(--active-color);
+  text-shadow: 0 0 30px var(--active-glow), 0 0 80px var(--active-dim), 0 0 160px var(--active-dim);
+  position: relative;
+  display: inline-block;
+  transition: color .5s, text-shadow .5s;
+  z-index: 3;
 }
 
 h1::after {
@@ -873,7 +818,7 @@ textarea.error {
 }
 
 /* ── RESPONSIVE ── */
-@media(max-width:520px) {
+@media(max-width:560px) {
   .mode-tabs {
     grid-template-columns: repeat(2, 1fr)
   }
@@ -883,11 +828,37 @@ textarea.error {
   }
 
   .hud-tag-bl,
-  .hud-tag-br {
+  .hud-tag-br,
+  .hud-tag-tr {
     display: none
   }
 
   h1 {
     letter-spacing: .08em
+  }
+
+  .mode-tab {
+    padding: 12px 6px;
+    font-size: .5rem;
+    letter-spacing: .08em
+  }
+
+  .wrap {
+    padding: 20px 14px 60px
+  }
+
+  .hud-top {
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center
+  }
+
+  .panel-body {
+    padding: 16px 14px
+  }
+
+  .translate-btn {
+    font-size: .6rem;
+    letter-spacing: .2em
   }
 }

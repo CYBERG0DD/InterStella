@@ -3,8 +3,17 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>base-x | Universal Base Translator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>base-x - universal base translator</title>
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#00e5ff">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BASEX">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="description" content="Universal Base Translator — Binary & Hex encoder/decoder">
   <link
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap"
     rel="stylesheet">
@@ -12,9 +21,6 @@
 </head>
 
 <body>
-  <!-- Custom cursor -->
-  <div id="cursor"></div>
-  <div class="cursor-ring" id="cursor-ring"></div>
   <!-- Overlays -->
   <div class="scanlines"></div>
   <div class="vignette"></div>
@@ -34,14 +40,14 @@
         <div class="hud-top-item">
           <div class="hud-dot"></div>SYSTEMS ONLINE
         </div>
-        <div class="hud-top-item">BASE-X // UNIVERSAL BASE TRANSLATOR</div>
+        <div class="hud-top-item">BASEX // UNIVERSAL BASE TRANSLATOR</div>
         <div class="hud-top-item">
           <div class="hud-dot" style="background:var(--violet);box-shadow:0 0 6px var(--violet)"></div>HEX READY
         </div>
       </div>
       <div class="logo-wrap">
-        <div class="logo-ring"></div>
-        <h1>BASE-X</h1>
+        <canvas id="atom-canvas" width="260" height="260"></canvas>
+        <h1 id="basex-title">BASE-X</h1>
       </div>
       <div class="header-sub">Universal Base Translator <span>// v3.0</span></div>
     </header>

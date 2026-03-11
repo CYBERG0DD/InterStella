@@ -1,14 +1,4 @@
 
-/* ── CURSOR ── */
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-document.addEventListener('mousemove', e => {
-  cur.style.left = e.clientX + 'px';
-  cur.style.top = e.clientY + 'px';
-  ring.style.left = e.clientX + 'px';
-  ring.style.top = e.clientY + 'px';
-});
-
 /* ── CANVAS GRID BG ── */
 let drawGrid;
 (function () {
@@ -83,7 +73,153 @@ let mode = 'encode';
 let outputText = '';
 let animTimeout = null;
 
-/* ── SET MODE ── */
+/* ── ATOM CANVAS ── */
+(function () {
+  const canvas = document.getElementById('atom-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2;
+
+  // 3 orbits: tiltX, tiltY, speed, color-source
+  const orbits = [
+    { tiltX: 20, tiltY: 0, tiltZ: 0, speed: 0.018, angle: 0 },
+    { tiltX: 20, tiltY: 0, tiltZ: 60, speed: 0.013, angle: 2.09 },
+    { tiltX: 20, tiltY: 0, tiltZ: 120, speed: 0.022, angle: 4.19 },
+  ];
+
+  const RX = 100, RY = 28; // orbit radii — wide ellipse tilted
+
+  // project 3D point to 2D with perspective
+  function project(x, y, z) {
+    const fov = 320;
+    const dist = fov + z;
+    return {
+      x: cx + (x * fov) / dist,
+      y: cy + (y * fov) / dist,
+      scale: fov / dist
+    };
+  }
+
+  // rotate point around Z axis
+  function rotZ(x, y, a) {
+    return { x: x * Math.cos(a) - y * Math.sin(a), y: x * Math.sin(a) + y * Math.cos(a) };
+  }
+  // rotate point around X axis
+  function rotX(y, z, a) {
+    return { y: y * Math.cos(a) - z * Math.sin(a), z: y * Math.sin(a) + z * Math.cos(a) };
+  }
+
+  // get orbit 3D points for an ellipse rotated by tiltZ
+  function getOrbitPoints(tiltZdeg, steps) {
+    const tz = tiltZdeg * Math.PI / 180;
+    const tilt = 68 * Math.PI / 180; // how much to tilt toward viewer
+    const pts = [];
+    for (let i = 0; i <= steps; i++) {
+      const a = (i / steps) * Math.PI * 2;
+      let x = RX * Math.cos(a);
+      let y = RY * Math.sin(a);
+      let z = 0;
+      // rotate in plane by tiltZ
+      const rz = rotZ(x, y, tz);
+      x = rz.x; y = rz.y;
+      // tilt toward viewer (X rotation)
+      const rx = rotX(y, z, tilt);
+      y = rx.y; z = rx.z;
+      pts.push({ x, y, z });
+    }
+    return pts;
+  }
+
+  // electron position on orbit at angle
+  function getElectronPos(tiltZdeg, angle) {
+    const tz = tiltZdeg * Math.PI / 180;
+    const tilt = 68 * Math.PI / 180;
+    let x = RX * Math.cos(angle);
+    let y = RY * Math.sin(angle);
+    let z = 0;
+    const rz = rotZ(x, y, tz);
+    x = rz.x; y = rz.y;
+    const rx = rotX(y, z, tilt);
+    y = rx.y; z = rx.z;
+    return { x, y, z };
+  }
+
+  let activeColor = '#00e5ff';
+  let glowColor = 'rgba(0,229,255,0.5)';
+
+  function hexToRgb(hex) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return { r, g, b };
+  }
+
+  function drawAtom() {
+    ctx.clearRect(0, 0, W, H);
+    const rgb = hexToRgb(activeColor);
+    const col = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+    const colA = (a) => `rgba(${rgb.r},${rgb.g},${rgb.b},${a})`;
+
+    // draw each orbit as projected ellipse path
+    orbits.forEach((orb, oi) => {
+      const pts = getOrbitPoints(orb.tiltZ, 120);
+      ctx.beginPath();
+      pts.forEach((p, i) => {
+        const proj = project(p.x, p.y, p.z);
+        if (i === 0) ctx.moveTo(proj.x, proj.y);
+        else ctx.lineTo(proj.x, proj.y);
+      });
+      ctx.closePath();
+      ctx.strokeStyle = colA(0.35);
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+
+    // draw electrons on top
+    orbits.forEach((orb) => {
+      const ep = getElectronPos(orb.tiltZ, orb.angle);
+      const proj = project(ep.x, ep.y, ep.z);
+      const r = 5 * proj.scale;
+
+      // glow
+      const eg = ctx.createRadialGradient(proj.x, proj.y, 0, proj.x, proj.y, r * 4);
+      eg.addColorStop(0, colA(0.9));
+      eg.addColorStop(0.4, colA(0.4));
+      eg.addColorStop(1, colA(0));
+      ctx.beginPath();
+      ctx.arc(proj.x, proj.y, r * 4, 0, Math.PI * 2);
+      ctx.fillStyle = eg;
+      ctx.fill();
+
+      // electron core with sphere shading
+      const esg = ctx.createRadialGradient(proj.x - r * 0.3, proj.y - r * 0.3, r * 0.1, proj.x, proj.y, r);
+      esg.addColorStop(0, 'white');
+      esg.addColorStop(0.3, col);
+      esg.addColorStop(1, colA(0.6));
+      ctx.beginPath();
+      ctx.arc(proj.x, proj.y, Math.max(r, 3), 0, Math.PI * 2);
+      ctx.fillStyle = esg;
+      ctx.fill();
+    });
+  }
+
+  function animate() {
+    orbits.forEach(o => o.angle += o.speed);
+    drawAtom();
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // expose color updater
+  window.setAtomColor = function (hex) {
+    activeColor = hex;
+    const rgb = hexToRgb(hex);
+    glowColor = `rgba(${rgb.r},${rgb.g},${rgb.b},0.5)`;
+    document.getElementById('atom-canvas').style.filter = `drop-shadow(0 0 18px ${hex})`;
+  };
+})();
+
+
 function setMode(m) {
   mode = m;
   const isHex = m === 'hexencode' || m === 'hexdecode';
@@ -101,11 +237,13 @@ function setMode(m) {
     root.style.setProperty('--active-dim', 'rgba(191,95,255,0.12)');
     root.style.setProperty('--active-glow', 'rgba(191,95,255,0.3)');
     root.style.setProperty('--active-border', 'rgba(191,95,255,0.25)');
+    if (window.setAtomColor) window.setAtomColor('#bf5fff');
   } else {
     root.style.setProperty('--active-color', '#00e5ff');
     root.style.setProperty('--active-dim', 'rgba(0,229,255,0.12)');
     root.style.setProperty('--active-glow', 'rgba(0,229,255,0.3)');
     root.style.setProperty('--active-border', 'rgba(0,229,255,0.25)');
+    if (window.setAtomColor) window.setAtomColor('#00e5ff');
   }
 
   // keep panel class for legacy fallback
@@ -319,6 +457,11 @@ function shake(el) {
   });
 }
 
-/* ── KEYBOARD HINT ── */
-const isMac = navigator.platform.toLowerCase().includes('mac');
-document.getElementById('translate-btn').title = `Translate (${isMac ? '⌘' : 'Ctrl'}+Enter)`;
+/* ── SERVICE WORKER ── */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log('BASEX SW registered'))
+      .catch(e => console.log('SW error:', e));
+  });
+}
