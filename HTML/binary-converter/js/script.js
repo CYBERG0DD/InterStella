@@ -1,4 +1,3 @@
-
 let mode = 'encode';
 let outputText = '';
 let animTimeout = null;
@@ -32,9 +31,22 @@ function setMode(m) {
     const activeBtn = document.getElementById('btn-' + m);
     activeBtn.classList.add(isHex ? 'hex-active' : 'active');
 
-    // panel hex styling
-    const panel = document.querySelector('.panel');
-    panel.classList.toggle('hex-mode', isHex);
+    // Switch active color variables
+    const root = document.documentElement;
+    if (isHex) {
+        root.style.setProperty('--active', '#39ff14');
+        root.style.setProperty('--active-glow', 'rgba(57, 255, 20, 0.15)');
+        root.style.setProperty('--active-border', 'rgba(57, 255, 20, 0.35)');
+    } else {
+        root.style.setProperty('--active', '#00e5ff');
+        root.style.setProperty('--active-glow', 'rgba(0, 229, 255, 0.15)');
+        root.style.setProperty('--active-border', 'rgba(0, 229, 255, 0.3)');
+    }
+
+    // update binary rain color
+    document.querySelectorAll('.rain-col').forEach(col => {
+        col.style.color = isHex ? '#39ff14' : '#00e5ff';
+    });
 
     const panelTitle = document.getElementById('panel-title');
     const inputLabel = document.getElementById('input-label-text');
@@ -62,17 +74,9 @@ function setMode(m) {
 }
 
 // === Validation ===
-function isValidText(text) {
-    return text.length > 0;
-}
-
-function isValidBinary(bin) {
-    return /^[01 ]+$/.test(bin);
-}
-
-function isValidHex(hex) {
-    return /^[0-9a-fA-F ]+$/.test(hex.trim());
-}
+function isValidText(text) { return text.length > 0; }
+function isValidBinary(bin) { return /^[01 ]+$/.test(bin); }
+function isValidHex(hex) { return /^[0-9a-fA-F ]+$/.test(hex.trim()); }
 
 // === Binary Encode/Decode ===
 function encodeBinary(text) {
@@ -113,7 +117,6 @@ function handleInput() {
     const cc = document.getElementById('char-count');
     cc.textContent = count + ' chars';
     cc.classList.toggle('warn', count > 200);
-
     document.getElementById('input-area').classList.remove('error');
     document.getElementById('error-msg').textContent = '';
 }
@@ -150,7 +153,6 @@ function runTranslate() {
             errorEl.textContent = '⚠ ENCODING FAILED: ' + e.message;
             inputEl.classList.add('error');
         }
-
     } else if (mode === 'decode') {
         if (!isValidBinary(input)) {
             errorEl.textContent = '⚠ ONLY 0, 1, AND SPACES ARE ALLOWED';
@@ -167,7 +169,6 @@ function runTranslate() {
             errorEl.textContent = '⚠ DECODE FAILED: ' + e.message;
             inputEl.classList.add('error');
         }
-
     } else if (mode === 'hexencode') {
         try {
             outputText = encodeHex(input);
@@ -177,7 +178,6 @@ function runTranslate() {
             errorEl.textContent = '⚠ HEX ENCODING FAILED: ' + e.message;
             inputEl.classList.add('error');
         }
-
     } else if (mode === 'hexdecode') {
         if (!isValidHex(input)) {
             errorEl.textContent = '⚠ ONLY HEX CHARACTERS (0-9, A-F) AND SPACES ALLOWED';
@@ -228,17 +228,13 @@ function updateStats(chars, bits, bytes, modeLabel) {
     document.getElementById('stat-bits').textContent = bits;
     document.getElementById('stat-bytes').textContent = bytes;
     document.getElementById('stat-mode').textContent = modeLabel;
-
-    const bar = document.getElementById('stats-bar');
-    bar.classList.add('visible');
+    document.getElementById('stats-bar').classList.add('visible');
 }
 
 // === Copy ===
 function copyOutput() {
     if (!outputText) return;
     const btn = document.getElementById('copy-btn');
-
-    // Try modern clipboard API first, fall back to execCommand
     const doSuccess = () => {
         btn.textContent = 'COPIED!';
         btn.classList.add('copied');
@@ -247,7 +243,6 @@ function copyOutput() {
             btn.classList.remove('copied');
         }, 1800);
     };
-
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(outputText).then(doSuccess).catch(() => fallbackCopy(doSuccess));
     } else {
