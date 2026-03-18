@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Security Check</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div id="rain"></div>
+  <!-- ── ENTRY SCREEN ── -->
+  <div id="entry-screen">
+    <div class="entry-logo">◈ GLOBAL SECURITY NETWORK // NODE-7X</div>
+    <div class="entry-title">IDENTITY VERIFICATION</div>
+    <div class="entry-sub">// ENTER YOUR DETAILS TO PROCEED</div>
+    <div class="entry-field">
+      <label class="entry-label">First Name</label>
+      <input class="entry-input" id="inp-fname" type="text" placeholder="Enter first name..." autocomplete="off"
+        spellcheck="false">
+    </div>
+    <div class="entry-field">
+      <label class="entry-label">Last Name</label>
+      <input class="entry-input" id="inp-lname" type="text" placeholder="Enter last name..." autocomplete="off"
+        spellcheck="false">
+    </div>
+    <div class="entry-field">
+      <label class="entry-label">Device / Location</label>
+      <input class="entry-input" id="inp-device" type="text" placeholder="e.g. iPhone, Lagos..." autocomplete="off"
+        spellcheck="false">
+    </div>
+    <button class="entry-btn" onclick="startVerify()">⟶ VERIFY IDENTITY</button>
+    <div class="entry-notice">🔒 Secured by SSL · Data encrypted in transit</div>
+  </div>
+  <!-- ── VERIFYING SCREEN ── -->
+  <div id="verify-screen">
+    <div class="verify-title">VERIFYING IDENTITY...</div>
+    <div class="verify-steps" id="vsteps">
+      <div class="vstep active" id="vs1"><span class="vstep-icon">🔍</span> Scanning identity database...</div>
+      <div class="vstep" id="vs2"><span class="vstep-icon">🛡️</span> Checking security clearance...</div>
+      <div class="vstep" id="vs3"><span class="vstep-icon">📡</span> Pinging network nodes...</div>
+      <div class="vstep" id="vs4"><span class="vstep-icon">✅</span> Finalizing access...</div>
+    </div>
+    <div class="verify-bar-track">
+      <div class="verify-bar-fill" id="verify-bar"></div>
+    </div>
+  </div>
+  <!-- ── MAIN HACK SCREEN ── -->
+  <div id="main">
+    <div class="top-bar">
+      <div>
+        <div style="font-family:'Orbitron',monospace;font-size:0.7rem;letter-spacing:4px;color:rgba(255,0,51,0.7)">◈
+          THREAT DETECTED</div>
+        <div class="sys-id" id="sys-id">SYS-ID: LOADING...</div>
+      </div>
+      <div style="text-align:right">
+        <div class="skull">💀</div>
+      </div>
+    </div>
+    <div class="warning-badge">⚠ CRITICAL SECURITY BREACH ⚠</div>
+    <h1 id="hack-title">YOU'VE BEEN<br>HACKED</h1>
+    <div class="subtitle" id="hack-sub">// UNAUTHORIZED ACCESS DETECTED — INITIATING WIPE SEQUENCE</div>
+    <div class="info-grid">
+      <div class="info-item"><span class="info-label">TARGET</span><span class="info-val" id="target-val">—</span></div>
+      <div class="info-item"><span class="info-label">IP ADDRESS</span><span class="info-val"
+          id="ip-val">SCANNING...</span></div>
+      <div class="info-item"><span class="info-label">DEVICE</span><span class="info-val"
+          id="device-val">SCANNING...</span></div>
+      <div class="info-item"><span class="info-label">STATUS</span><span class="info-val"
+          style="color:#ff0033;animation:pulse 0.5s infinite">● COMPROMISED</span></div>
+    </div>
+    <div class="device-stats">
+      <div class="stat-item"><span class="stat-label">BATTERY</span><span class="stat-val-text"
+          id="battery-val">READING...</span>
+        <div class="stat-bar-track">
+          <div class="stat-bar-fill" id="battery-bar" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="stat-item"><span class="stat-label">STORAGE ACCESSED</span><span class="stat-val-text"
+          id="storage-val">READING...</span>
+        <div class="stat-bar-track">
+          <div class="stat-bar-fill" id="storage-bar" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="stat-item"><span class="stat-label">RAM HIJACKED</span><span class="stat-val-text"
+          id="ram-val">READING...</span>
+        <div class="stat-bar-track">
+          <div class="stat-bar-fill" id="ram-bar" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="stat-item"><span class="stat-label">CPU LOAD</span><span class="stat-val-text"
+          id="cpu-val">READING...</span>
+        <div class="stat-bar-track">
+          <div class="stat-bar-fill" id="cpu-bar" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="files-section">
+      <div class="files-title">DELETING FILES</div>
+      <div id="file-bars"></div>
+    </div>
+    <div class="countdown-section">
+      <div class="countdown-label">SELF DESTRUCT SEQUENCE INITIATED</div>
+      <div class="countdown-number" id="countdown">12</div>
+      <div class="countdown-sub">SECONDS UNTIL COMPLETE SYSTEM WIPE</div>
+    </div>
+    <div class="terminal" id="terminal"></div>
+    <div class="bottom-bar">
+      <span>HAXOR-V4.2.0</span>
+      <span id="timestamp"></span>
+      <span>ENCRYPTION: BYPASSED</span>
+    </div>
+  </div>
+  <!-- WEBCAM ALERT -->
+  <div id="webcam-alert">
+    <div class="cam-title"><span class="cam-dot"></span>CAMERA ACCESS</div>
+    <div class="cam-msg">📷 Webcam activated<br>Recording in progress...<br><span style="color:#ff0033">Stream:
+        LIVE</span></div>
+  </div>
+  <!-- HACKER CHAT -->
+  <div id="hacker-chat">
+    <div class="chat-header">
+      <div class="chat-online"></div>HAXOR_X // ONLINE
+    </div>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-input-bar">// ENCRYPTED CHANNEL</div>
+  </div>
+  <!-- GOTCHA -->
+  <div id="gotcha">
+    <div class="gotcha-emoji">😂</div>
+    <div class="gotcha-title">GOTCHA!</div>
+    <div class="gotcha-name" id="gotcha-name"></div>
+    <div class="gotcha-sub">// PRANK COMPLETE — YOU'RE FINE LOL</div>
+    <div class="gotcha-msg">
+      Relax — <span>nothing happened</span> to your device! 😂<br>
+      Your files are safe, you weren't hacked,<br>and your device is <span>perfectly fine</span>. 🙏
+    </div>
+    <div>
+      <button class="share-btn" onclick="shareLink()">📤 SEND TO FRIENDS</button>
+      <button class="share-btn" onclick="restart()">🔁 RESTART PRANK</button>
+    </div>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+
+</html>
