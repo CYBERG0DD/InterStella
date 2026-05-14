@@ -1,4 +1,5 @@
-I wanted to ugrade my landing page to look like something close to lusion.co and this was what Gemini suggested
+I wanted to ugrade my landing page to a very high and captivating premuim landing page looking expensive just something close to lusion.co and this was what Gemini suggested 
+
 To pull off that cinematic, high-end "Cyber Premium" aesthetic for FanBack without an agency, you need a very specific combination of development libraries, 3D asset tools, and AI helpers.
 
 Since you already have the Vite, React, Tailwind, and GSAP foundation, here is the exact toolkit to bridge the gap into the 3D world:
