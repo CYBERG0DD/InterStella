@@ -25,3 +25,6 @@ Interger = 16
 String = 'Mel CEO OF INFINITE TECHNOLOGIES'
 print(type(Interger))
 print(type(String))
+
+
+
