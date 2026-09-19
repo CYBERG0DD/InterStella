@@ -1,6 +1,9 @@
 ### Power shell command to run claude code
 
 ```ps1
+cd $env:USERPROFILE\Downloads 
+& "$env:USERPROFILE\Downloads\claude-code-agentrouter-setup.ps1"
+
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 .\claude-code-agentrouter-setup.ps1
 
